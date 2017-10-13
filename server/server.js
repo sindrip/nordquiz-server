@@ -70,6 +70,8 @@ io.on('connection', function(socket){
 
   socket.on('joinGame', function(msg) {  
     if (game && msg.roomName === 'nordquiz') {
+      game.addPlayer(msg.playerName);
+
       socket.playerName = msg.playerName;
 
       socket.join(msg.roomName);
@@ -90,7 +92,19 @@ io.on('connection', function(socket){
   });
 
   socket.on('answerQuestion', function(msg) {
-    game.answerQuestion(socket.playerName, msg.questionNumber, msg.answer);
+    let pAnswers = game.answerQuestion(socket.playerName, msg.questionNumber, msg.answer);
+    let ret = {};
+
+    pAnswers.data.forEach((ans, cIndex) => {
+      if (ans) {
+        ret.push({
+          id: cIndex,
+          answer: ans,
+        });
+      }
+    });
+
+    socket.emit('res', ret);
   });
 
 });

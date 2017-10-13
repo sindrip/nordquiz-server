@@ -50,7 +50,7 @@ class Game {
   answerQuestion(name, questionNumber, answer) {
     if (this.players[name]) {
       this.players[name][questionNumber] = answer;
-      return this._payload(answer);
+      return this._payload(this.players[name]);
     }
 
     return this._payload(null);
