@@ -1,0 +1,35 @@
+{
+  "name": "nordquiz-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js",
+    "test-watch": "nodemon --exec npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sindrip/nordquiz-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sindrip/nordquiz-server/issues"
+  },
+  "homepage": "https://github.com/sindrip/nordquiz-server#readme",
+  "devDependencies": {
+    "expect": "^21.2.1",
+    "mocha": "^4.0.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.1",
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^3.10.1",
+    "morgan": "^1.9.0",
+    "socket.io": "^2.0.3"
+  }
+}
