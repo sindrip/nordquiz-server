@@ -1,5 +1,5 @@
 const pgPool = require('./pgPool');
-const {Game} = require('./Game.js');
+const {Game} = require('./game.js');
 
 let populateQuestions = async () => {
     let dbrows = [];
