@@ -15,13 +15,17 @@ let populateQuestions = async () => {
 
 // let questions = ['q1', 'q2'];
 // questions er promise thegar thad fer inn i game
-let questions = populateQuestions();
-let game = new Game(questions);
+let questions;
+let game;
 
 let socketio;
 
-let connection = (io) => {
+let connection = async (io) => {
     socketio = io;
+    if (!questions) {
+      questions = await populateQuestions();
+      newGame();
+    }
 
     io.on('connection', function(socket){
         console.log('client connected');

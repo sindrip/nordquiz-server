@@ -3,6 +3,7 @@ class Game {
   // GAME STATES: [PRE, PLAY, POST, END]
   constructor(questions) {
     this.state = 'PRE';
+    // console.log(questions[0].question)s
 
     this.questions = questions;
     this.question = null;
@@ -25,6 +26,8 @@ class Game {
 
   nextQuestion() {
     if (this.state !== 'PLAY') return this._payload(null);
+
+    console.log(this.questionNumber, this.questions.length);
 
     if (++this.questionNumber === this.questions.length) {
       this.state = 'POST';
