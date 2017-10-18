@@ -37,7 +37,7 @@ class Game {
   }
 
   getPlayedQuestions() {
-    if (this.state !== 'PLAY') return this._payload(null);
+    if (this.state === 'POST') return this._payload(this.questions);
     
     let questions = [];
 

@@ -16,7 +16,7 @@ let connection = (io) => {
             console.log('client disconnected');
         });
 
-        socket.emit('AllQuestions', game.getPlayedQuestions());
+        socket.emit('allQuestions', game.getPlayedQuestions());
     });
 }
 
@@ -29,6 +29,7 @@ let newGame = () => {
     console.log('newgame')
     game = new Game(questions);
     game.start();
+    socketio.emit('allQuestions', game.getPlayedQuestions());
 }
 
 let nextQuestion = () => {
