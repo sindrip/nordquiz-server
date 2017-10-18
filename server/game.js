@@ -38,24 +38,6 @@ class Game {
     return this._payload(this.question);
   }
 
-  addPlayer(name, code) {
-    if (this.players[name]) {
-      return this._payload(null);
-    }
-
-    this.players[name] = [];
-    return this._payload(name);
-  }
-
-  answerQuestion(name, questionNumber, answer) {
-    if (this.players[name]) {
-      this.players[name][questionNumber] = answer;
-      return this._payload(this.players[name]);
-    }
-
-    return this._payload(null);
-  }
-
   getQuestions() {
     return this.questions;
   }
