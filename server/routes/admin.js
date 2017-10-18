@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 
+const pgPool = require('./../pgPool');
 const socketController = require('./../socketController.js');
 
 let generateAuthToken = (userID) => {
@@ -41,11 +42,21 @@ router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname + '/../../public/login.html'));
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { user, password } = req.body;
     
-    // GOOD HARDCODE YES, IS WORK THOUGH
-    if (user !== 'admin' && password !== 'admin') {
+    // GR8 PLAINTEXT SECURITY
+    let dbrows;
+    try {
+      dbrows = await pgPool.query('SELECT * FROM Users where username = $1 AND password = $2', [user, password]);
+      dbrows = dbrows.rows;
+      console.log(dbrows)
+    } catch (e) {
+      console.log(e)
+    }
+
+    console.log(dbrows, dbrows.length)
+    if (dbrows.length !== 1) {
       return res.sendFile(path.join(__dirname + '/../../public/login.html'));
     }
 
