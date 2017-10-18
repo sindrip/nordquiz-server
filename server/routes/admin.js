@@ -1,9 +1,10 @@
 const path = require('path');
 
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
+
+const socketController = require('./../socketController.js');
 
 let generateAuthToken = (userID) => {
   var access = 'auth';
@@ -44,7 +45,7 @@ router.post('/login', (req, res) => {
     const { user, password } = req.body;
     
     // GOOD HARDCODE YES, IS WORK THOUGH
-    if (user != 'admin' && password != 'admin') {
+    if (user !== 'admin' && password !== 'admin') {
       return res.sendFile(path.join(__dirname + '/../../public/login.html'));
     }
 
@@ -60,6 +61,16 @@ router.get('/dashboard', authenticate, (req, res) => {
 router.get('/logout', (req, res) => {
   return res.cookie('jwtToken', '', { maxAge: 900000, httpOnly: true })
     .redirect('/admin/login');
+});
+
+router.post('/newgame', (req, res) => {
+  socketController.newGame();
+  return res.status(200).send();
+});
+
+router.post('/nextquestion', (req, res) => {
+  socketController.nextQuestion();
+  return res.status(200).send();
 });
 
 module.exports = router;
