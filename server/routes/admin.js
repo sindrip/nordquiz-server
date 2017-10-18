@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 
+const socketController = require('./../socketController.js');
+
 let generateAuthToken = (userID) => {
   var access = 'auth';
   var token = jwt.sign({id: userID, access}, process.env.JWT_SECRET).toString();
@@ -59,6 +61,16 @@ router.get('/dashboard', authenticate, (req, res) => {
 router.get('/logout', (req, res) => {
   return res.cookie('jwtToken', '', { maxAge: 900000, httpOnly: true })
     .redirect('/admin/login');
+});
+
+router.post('/newgame', (req, res) => {
+  socketController.newGame();
+  return res.status(200).send();
+});
+
+router.post('/nextquestion', (req, res) => {
+  socketController.nextQuestion();
+  return res.status(200).send();
 });
 
 module.exports = router;

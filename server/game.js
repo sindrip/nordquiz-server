@@ -24,24 +24,24 @@ class Game {
   }
 
   nextQuestion() {
-    if (this.state !==- 'PLAY') return this._payload(null);
+    if (this.state !== 'PLAY') return this._payload(null);
 
     if (++this.questionNumber === this.questions.length) {
       this.state = 'POST';
       return this._payload(null);
     }
-
+    
     this.question = this.questions[this.questionNumber];
 
     return this._payload(this.question);
   }
 
   getPlayedQuestions() {
-    if (this.state !==- 'PLAY') return this._payload(null);
+    if (this.state !== 'PLAY') return this._payload(null);
     
     let questions = [];
 
-    for (let i = 0; i < questionNumber + 1; i++) {
+    for (let i = 0; i < this.questionNumber + 1; i++) {
       questions.push(this.questions[i]);
     }
 

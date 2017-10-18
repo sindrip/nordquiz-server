@@ -3,16 +3,20 @@
   <head>
     <title>NordQuiz API</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="/admin.js"></script>
   </head>
 
   <body>
     <h1>Admin Dashboard - is very happy if work</h1>
-    <button id='byrjaleik'>Byrja leik</button>
+    <form method="POST" action="/admin/newgame">
+      <button id='byrjaleik'>Byrja leik</button>    
+    </form>
     <button id='naestaspurning'>Naesta spurning</button>
     </br></br></br>
 
-    <button id='getGame'>Saekja Stodu</button>
+    <p>Nuverandi leikur:</p>
+    <p id="output">...</p>
 
     </form>
   </body>
