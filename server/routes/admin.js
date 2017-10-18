@@ -1,6 +1,5 @@
 const path = require('path');
 
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
@@ -44,7 +43,7 @@ router.post('/login', (req, res) => {
     const { user, password } = req.body;
     
     // GOOD HARDCODE YES, IS WORK THOUGH
-    if (user != 'admin' && password != 'admin') {
+    if (user !== 'admin' && password !== 'admin') {
       return res.sendFile(path.join(__dirname + '/../../public/login.html'));
     }
 

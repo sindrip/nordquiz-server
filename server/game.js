@@ -7,8 +7,6 @@ class Game {
     this.questions = questions;
     this.question = null;
     this.questionNumber = -1;
-
-    this.players = {};
   }
 
   // PAYLOAD : { STATE, DATA }
@@ -26,7 +24,7 @@ class Game {
   }
 
   nextQuestion() {
-    if (this.state != 'PLAY') return this._payload(null);
+    if (this.state !==- 'PLAY') return this._payload(null);
 
     if (++this.questionNumber === this.questions.length) {
       this.state = 'POST';
@@ -36,6 +34,18 @@ class Game {
     this.question = this.questions[this.questionNumber];
 
     return this._payload(this.question);
+  }
+
+  getPlayedQuestions() {
+    if (this.state !==- 'PLAY') return this._payload(null);
+    
+    let questions = [];
+
+    for (let i = 0; i < questionNumber + 1; i++) {
+      questions.push(this.questions[i]);
+    }
+
+    return this._payload(questions);
   }
 
   getQuestions() {
@@ -48,10 +58,6 @@ class Game {
 
   getState() {
     return this.state;
-  }
-
-  getPlayers() {
-    return this.players;
   }
 }
 
