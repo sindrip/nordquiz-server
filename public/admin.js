@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       socket = io();
 
       socket.on('allQuestions', function(msg) {
-        console.log('test');
+        console.log('test', msg);
         const element = document.getElementById('output');
         msg.data.forEach((q) => {
           element.innerHTML  += '\n' + q;

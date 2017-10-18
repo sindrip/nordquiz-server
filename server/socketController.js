@@ -1,6 +1,21 @@
+const pgPool = require('./pgPool');
 const {Game} = require('./Game.js');
 
-let questions = ['q1', 'q2'];
+let populateQuestions = async () => {
+    let dbrows = [];
+    try {
+      dbrows = await pgPool.query('SELECT * FROM questions');
+      dbrows = dbrows.rows;
+    } catch (e) {
+      console.log(e)
+    } finally {
+      return dbrows;
+    }
+};
+
+// let questions = ['q1', 'q2'];
+// questions er promise thegar thad fer inn i game
+let questions = populateQuestions();
 let game = new Game(questions);
 
 let socketio;
