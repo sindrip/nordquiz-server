@@ -50,18 +50,16 @@ router.post('/login', async (req, res) => {
     try {
       dbrows = await pgPool.query('SELECT * FROM Users where username = $1 AND password = $2', [user, password]);
       dbrows = dbrows.rows;
-      console.log(dbrows)
     } catch (e) {
       console.log(e)
     }
 
-    console.log(dbrows, dbrows.length)
     if (dbrows.length !== 1) {
       return res.sendFile(path.join(__dirname + '/../../public/login.html'));
     }
 
     const token = generateAuthToken('admin');
-    return res.cookie('jwtToken', token, { maxAge: 900000, httpOnly: true })
+    return res.cookie('jwtToken', token, { maxAge: 9000000, httpOnly: true })
       .redirect('/admin/dashboard');
 });
 

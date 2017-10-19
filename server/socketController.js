@@ -4,7 +4,7 @@ const {Game} = require('./game.js');
 let populateQuestions = async () => {
     let dbrows = [];
     try {
-      dbrows = await pgPool.query('SELECT * FROM questions');
+      dbrows = await pgPool.query('SELECT * FROM questions ORDER BY id');
       dbrows = dbrows.rows;
     } catch (e) {
       console.log(e)
